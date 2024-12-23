@@ -177,7 +177,7 @@ func Register(c *fiber.Ctx) error {
 	}
 
 	// Check if email is valid
-	if input.Email == nil {
+	if input.Email != nil {
 		if !isEmail(*input.Email) {
 			return h.BadRequest(c, []string{"Email is not valid"})
 		}

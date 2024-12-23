@@ -10,6 +10,7 @@ import (
 
 func SetupRoutesApp(app *fiber.App) {
 	routes.UserRoutes(app.Group("/users"))
+	routes.AuthRoutes(app.Group("/auth"))
 
 	// Default route
 	app.Get("/", func(c *fiber.Ctx) error {

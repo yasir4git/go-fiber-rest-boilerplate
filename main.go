@@ -20,7 +20,7 @@ import (
 // @contact.email fiber@swagger.io
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
-// @host localhost:3000
+// @host localhost:5001
 // @BasePath /
 
 func main() {
@@ -37,7 +37,7 @@ func main() {
 
 	routes.SetupRoutesApp(app)
 
-	if err := app.Listen(":3000"); err != nil {
+	if err := app.Listen(":" + config.AppConfig.PORT); err != nil {
 		log.Fatalf("Failed to start server: %v", err)
 	}
 }

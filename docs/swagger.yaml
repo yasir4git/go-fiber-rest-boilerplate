@@ -2,8 +2,8 @@ basePath: /
 definitions:
   dto.CreateUserDTO:
     properties:
-      age:
-        type: integer
+      country_code:
+        type: string
       email:
         type: string
       name:
@@ -11,20 +11,52 @@ definitions:
         minLength: 3
         type: string
     required:
-    - age
+    - country_code
     - email
     - name
     type: object
-  dto.UpdateUserDTO:
+  dto.LoginInput:
     properties:
-      age:
-        type: integer
+      password:
+        type: string
+      phone:
+        type: string
+    type: object
+  dto.RegisterInput:
+    properties:
+      country_code:
+        type: string
       email:
         type: string
       name:
         maxLength: 32
         minLength: 3
         type: string
+      password:
+        maxLength: 32
+        minLength: 8
+        type: string
+      phone:
+        type: string
+    required:
+    - country_code
+    - name
+    - password
+    - phone
+    type: object
+  dto.UpdateUserDTO:
+    properties:
+      country_code:
+        type: string
+      email:
+        type: string
+      name:
+        maxLength: 32
+        minLength: 3
+        type: string
+    required:
+    - country_code
+    - email
     type: object
   utils.ErrorDetails:
     properties:
@@ -65,7 +97,7 @@ definitions:
       status:
         type: string
     type: object
-host: localhost:3000
+host: localhost:5001
 info:
   contact:
     email: fiber@swagger.io
@@ -78,6 +110,111 @@ info:
   title: Go Fiber Boilerplate
   version: "1.0"
 paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Login
+      parameters:
+      - description: Login
+        in: body
+        name: login
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LoginInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.ResponseData'
+      summary: Login
+      tags:
+      - Auth
+  /auth/logout:
+    delete:
+      description: Logout
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.ResponseData'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Logout
+      tags:
+      - Auth
+  /auth/me:
+    get:
+      consumes:
+      - application/json
+      description: Get User
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.ResponseData'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      security:
+      - Bearer: []
+      summary: Get User
+      tags:
+      - Auth
+  /auth/refresh-token:
+    get:
+      consumes:
+      - application/json
+      description: Refresh Token
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.ResponseData'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Refresh Token
+      tags:
+      - Auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Register
+      parameters:
+      - description: Register
+        in: body
+        name: register
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RegisterInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.ResponseData'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Register
+      tags:
+      - Auth
   /users:
     get:
       consumes:
