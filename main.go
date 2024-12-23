@@ -31,8 +31,13 @@ func main() {
 	config.LoadConfig()
 	database.ConnectDB()
 
-	app := fiber.New()
+	app := fiber.New(
+		fiber.Config{
+			AppName: "Go Fiber Boilerplate",
+		},
+	)
 
+	middlewares.SetupRecovery(app)
 	middlewares.SetupCORS(app)
 
 	routes.SetupRoutesApp(app)
