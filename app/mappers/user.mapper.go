@@ -7,8 +7,10 @@ import (
 
 func UserModel_ToUserDTO(user *models.User) *dto.UserDTO {
 	return &dto.UserDTO{
-		ID:   user.ID,
-		Name: user.Name,
+		Name:     user.Name,
+		Phone:    user.Phone,
+		Email:    user.Email,
+		IsActive: user.IsActive,
 	}
 }
 
@@ -28,7 +30,6 @@ func UsersModel_ToUsersDTOs(users []*models.User) []*dto.UserDTO {
 	dtos := make([]*dto.UserDTO, len(users))
 	for i, user := range users {
 		dtos[i] = &dto.UserDTO{
-			ID:   user.ID,
 			Name: user.Name,
 		}
 	}
