@@ -134,7 +134,7 @@ func Login(c *fiber.Ctx) error {
 // @Tags Auth
 // @Accept json
 // @Produce json
-// @Security Bearer
+// @Security BearerAuth
 // @Success 200 {object} utils.ResponseData
 // @Failure 400 {object} utils.ErrorResponse
 // @Router /auth/me [get]

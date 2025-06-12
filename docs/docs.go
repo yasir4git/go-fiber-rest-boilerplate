@@ -87,7 +87,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "Bearer": []
+                        "BearerAuth": []
                     }
                 ],
                 "description": "Get User",
@@ -410,8 +410,8 @@ const docTemplate = `{
             "type": "object",
             "required": [
                 "country_code",
-                "email",
-                "name"
+                "name",
+                "phone"
             ],
             "properties": {
                 "country_code": {
@@ -424,6 +424,9 @@ const docTemplate = `{
                     "type": "string",
                     "maxLength": 32,
                     "minLength": 3
+                },
+                "phone": {
+                    "type": "string"
                 }
             }
         },
@@ -472,7 +475,7 @@ const docTemplate = `{
             "type": "object",
             "required": [
                 "country_code",
-                "email"
+                "phone"
             ],
             "properties": {
                 "country_code": {
@@ -485,6 +488,9 @@ const docTemplate = `{
                     "type": "string",
                     "maxLength": 32,
                     "minLength": 3
+                },
+                "phone": {
+                    "type": "string"
                 }
             }
         },
@@ -547,6 +553,13 @@ const docTemplate = `{
                     "type": "string"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "BearerAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }`
