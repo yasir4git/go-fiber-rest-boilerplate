@@ -10,10 +10,12 @@ definitions:
         maxLength: 32
         minLength: 3
         type: string
+      phone:
+        type: string
     required:
     - country_code
-    - email
     - name
+    - phone
     type: object
   dto.LoginInput:
     properties:
@@ -54,9 +56,11 @@ definitions:
         maxLength: 32
         minLength: 3
         type: string
+      phone:
+        type: string
     required:
     - country_code
-    - email
+    - phone
     type: object
   utils.ErrorDetails:
     properties:
@@ -166,7 +170,7 @@ paths:
           schema:
             $ref: '#/definitions/utils.ErrorResponse'
       security:
-      - Bearer: []
+      - BearerAuth: []
       summary: Get User
       tags:
       - Auth
@@ -359,4 +363,9 @@ paths:
       summary: Update User
       tags:
       - Users
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"
